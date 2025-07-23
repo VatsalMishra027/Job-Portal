@@ -6,3 +6,73 @@
 *{
     font-family: Outfit;
 }
+@layer base{
+    html{
+        scroll-behavior: smooth;
+    }
+}
+::-webkit-scrollbar{
+    display:none;
+}
+.rich-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #374151; /* Tailwind's text-gray-700 */
+  padding: 0.5rem 0;
+}
+
+.rich-text h1,
+.rich-text h2,
+.rich-text h3 {
+  font-weight: 600;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  color: #111827; /* Tailwind's text-gray-900 */
+}
+
+.rich-text p {
+  margin-bottom: 1rem;
+}
+
+.rich-text ul,
+.rich-text ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.rich-text ul li::marker {
+  color: #3b82f6; /* blue-500 */
+}
+
+.rich-text ol {
+  list-style-type: decimal;
+}
+
+.rich-text a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+}
+
+.rich-text blockquote {
+  border-left: 4px solid #d1d5db; /* gray-300 */
+  padding-left: 1rem;
+  font-style: italic;
+  color: #6b7280; /* gray-500 */
+  margin: 1rem 0;
+}
+
+.rich-text strong {
+  font-weight: bold;
+}
+
+.rich-text em {
+  font-style: italic;
+}
+
+.rich-text code {
+  background-color: #f3f4f6; /* gray-100 */
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 90%;
+}
