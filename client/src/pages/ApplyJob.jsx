@@ -62,7 +62,7 @@ const ApplyJob = () => {
           </div>
           <div className='flex flex-col justify-center text-end text-sm max-md:text-center' >
             <button className='bg-blue-600 p-2.5 px-10 text-white rounded'>Apply Now</button>
-            <p className='mt-1 text-gray-600'>Posted {moment(JobData.data).fromNow()}</p>
+            <p className='mt-1 text-gray-600'>Posted {moment(JobData.date).fromNow()}</p>
           </div>
         </div>
           <div className='flex flex-col lg:flex-row justify-between items-start'>
