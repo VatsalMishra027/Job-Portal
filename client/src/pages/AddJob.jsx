@@ -1,6 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState,useContext } from 'react'
 import Quill from 'quill';
 import { JobCategories, JobLocations } from '../assets/assets';
+import { AppContext } from '../context/AppContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const AddJob = () => {
  
@@ -13,6 +16,37 @@ const AddJob = () => {
    const editorRef = useRef(null)
    const quillRef = useRef(null)
 
+   const {backendUrl,companyToken} = useContext(AppContext)
+
+   const onSubmitHandler = async(e) => {
+     e.preventDefault()
+
+     try {
+        
+        const description = quillRef.current.root.innerHTML
+       
+        const {data} = await axios.post(backendUrl +'/api/company/post-job', 
+          {title,description,location,salary,category,level},
+          {headers: {token:companyToken}}
+        )
+
+        if(data.success){
+          toast.success(data.message)
+          setTitle('')
+          setSalary(0)
+          quillRef.current.root.innerHTML = ""
+        }
+        else{
+          toast.error(data.message)
+        }
+
+     } catch (error) {
+         toast.error(error.message)
+      
+     }
+   }
+
+
 
    useEffect(() =>{
     //initiate qill only once
@@ -24,7 +58,7 @@ const AddJob = () => {
    },[])
 
   return (
-    <form className='container p-4 flex flex-col w-full items-start gap-3' >
+    <form onSubmit={onSubmitHandler}  className='container p-4 flex flex-col w-full items-start gap-3' >
         <div className='w-full' >
             <p className='mb-2'>Job Title</p>
             <input type="text" placeholder='Type here' onChange={e => setTitle(e.target.value)} value = {title} 
@@ -56,7 +90,7 @@ const AddJob = () => {
             </select>
           </div>
            <div>
-            <p className='mb-2'>Job Category</p>
+            <p className='mb-2'>Job Level</p>
             <select className='w-full px-3 py-2 border-2 border-gray-300 rounded ' onChange={e => setLevel(e.target.value)}>
               <option value="Beginner level">Beginner level</option>
               <option value="Intermediate level">Intermediate level</option>
@@ -67,7 +101,7 @@ const AddJob = () => {
         </div>
         <div>
           <p className='mb-2' >Job Salary</p>
-          <input min={0} className='w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]' onChange={e => setSalary(e.target.value)} type="Number" placeholder='2500' />
+          <input min={0} className='w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]' onChange={e => setSalary(e.target.value)} value={salary} type="Number" placeholder='2500' />
         </div>
 
         <button className='w-28 py-3 mt-4 bg-black text-white rounded' >ADD</button>
