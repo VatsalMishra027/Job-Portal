@@ -26,9 +26,9 @@ useEffect(() => {
     <div className='min-h-screen'>
 
          {/* Navbar for Recruiter Panel */}
-         <div className='shadow py-4' >
-            <div  className='px-5 flex justify-between items-center' >
-                <img onClick={e => navigate('/')} className='max-sm:w-32 cursor-pointer' src={assets.logo} alt="" />
+         <div className='shadow py-3' >
+            <div  className='max-w-7xl mx-auto px-5 flex justify-between items-center' >
+                <img onClick={e => navigate('/')} className='h-12 sm:h-14 md:h-16 w-auto cursor-pointer' src={assets.logo} alt="" />
                   {companyData && (
                      <div className='flex items-center gap-3' >
                     <p className='max-sm:hidden'>Welcome,{companyData.name}</p>
