@@ -8,7 +8,7 @@ import Job from "../models/Job.js";
 import JobApplication from "../models/JobApplication.js";
 
 
-// gyb  
+
 export const registerCompany = async(req,res) => {
     const {name,email,password} = req.body
 
